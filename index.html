@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>원격 프로덕션 기술 검증 대시보드 (개선안)</title>
+    <title>원격 프로덕션 기술 검증 대시보드 (최종본)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
@@ -54,7 +54,7 @@
         <div class="w-full max-w-[1920px] mx-auto px-4 py-3">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <h1 class="text-xl md:text-2xl font-bold text-slate-700">원격 프로덕션 기술 검증 대시보드</h1>
-                <nav id="navbar" class="flex space-x-2 mt-2 md:mt-0">
+                <nav id="navbar" class="flex flex-wrap justify-center space-x-2 mt-2 md:mt-0">
                     <a href="#procedure" class="nav-link">테스트 절차</a>
                     <a href="#measurements" class="nav-link">딜레이 측정 결과</a>
                     <a href="#final-result" class="nav-link">최종 결과</a>
@@ -105,33 +105,56 @@
             <h2 class="text-3xl font-bold text-center mb-2 text-slate-800">딜레이 측정 결과</h2>
             <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">항목별 네트워크 딜레이 측정 결과와 실제 테스트 환경에서 녹화된 참고 자료입니다.</p>
             
-            <!-- Simulator cards will be dynamically inserted here -->
             <div id="simulator-container" class="space-y-8"></div>
             
         </section>
 
         <section id="final-result" class="mb-16 scroll-mt-24">
             <h2 class="text-3xl font-bold text-center mb-8 text-slate-800">최종 결과</h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- 현장 프리캠 딜레이 카드 -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-teal-500 flex flex-col items-center text-center">
-                    <div class="bg-teal-100 text-teal-600 rounded-full p-3 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.55a2 2 0 01.45 2.42l-2.42 4.84a2 2 0 01-3.4 0l-2.42-4.84A2 2 0 0112 10.5V6a2 2 0 012-2h0a2 2 0 012 2v4.5zM4 10h4v10H4z" /></svg>
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <!-- 현장 프리캠 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg flex-1 flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 text-teal-600 rounded-full p-2 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.55a2 2 0 01.45 2.42l-2.42 4.84a2 2 0 01-3.4 0l-2.42-4.84A2 2 0 0112 10.5V6a2 2 0 012-2h0a2 2 0 012 2v4.5zM4 10h4v10H4z" /></svg></div>
+                        <h3 class="text-lg font-bold text-slate-800">현장 프리캠 딜레이</h3>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-800 mb-2">현장 프리캠 딜레이</h3>
-                    <p class="text-slate-600 mb-4">'화면 전송' + '음성 통신'</p>
-                    <p class="text-xl font-medium text-slate-500">667ms + 1,650ms</p>
-                    <p class="text-5xl font-extrabold text-teal-600 mt-2">2,317<span class="text-3xl font-semibold ml-1">ms</span></p>
+                    <div class="relative pt-8">
+                        <div class="w-full bg-slate-200 rounded-full h-10 flex overflow-hidden text-white font-bold text-sm">
+                            <div class="bg-slate-400 h-full flex items-center justify-center transition-all duration-500" style="width: 28.78%;"><span>667ms</span></div>
+                            <div class="bg-teal-500 h-full flex items-center justify-center transition-all duration-500" style="width: 71.22%;"><span>1,650ms</span></div>
+                        </div>
+                        <div class="absolute top-0 left-0 w-full text-xs font-semibold text-slate-600">
+                            <div class="absolute left-0 text-center">현지<div class="w-px h-2 bg-slate-400 mx-auto"></div></div>
+                            <div class="absolute left-[28.78%] -translate-x-1/2 text-center">원격지<div class="w-px h-2 bg-slate-400 mx-auto"></div></div>
+                            <div class="absolute right-0 text-center">현지<div class="w-px h-2 bg-slate-400 mx-auto"></div></div>
+                        </div>
+                    </div>
+                     <div class="text-right mt-2">
+                        <span class="text-slate-500 text-sm">총 합계:</span>
+                        <span class="text-2xl font-bold text-teal-600">2,317 ms</span>
+                    </div>
                 </div>
-                <!-- 원격 FR7 딜레이 카드 -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-indigo-500 flex flex-col items-center text-center">
-                     <div class="bg-indigo-100 text-indigo-600 rounded-full p-3 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                <!-- 원격 FR7 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg flex-1 flex flex-col">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full p-2 mr-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></div>
+                        <h3 class="text-lg font-bold text-slate-800">원격 FR7 딜레이</h3>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-800 mb-2">원격 FR7 딜레이</h3>
-                    <p class="text-slate-600 mb-4">'화면 전송' + 'FR7 무빙 제어'</p>
-                    <p class="text-xl font-medium text-slate-500">667ms + 892ms</p>
-                    <p class="text-5xl font-extrabold text-indigo-600 mt-2">1,559<span class="text-3xl font-semibold ml-1">ms</span></p>
+                     <div class="relative pt-8">
+                        <div class="w-full bg-slate-200 rounded-full h-10 flex overflow-hidden text-white font-bold text-sm">
+                            <div class="bg-slate-400 h-full flex items-center justify-center transition-all duration-500" style="width: 42.78%;"><span>667ms</span></div>
+                            <div class="bg-indigo-500 h-full flex items-center justify-center transition-all duration-500" style="width: 57.22%;"><span>892ms</span></div>
+                        </div>
+                        <div class="absolute top-0 left-0 w-full text-xs font-semibold text-slate-600">
+                            <div class="absolute left-0 text-center">현지<div class="w-px h-2 bg-slate-400 mx-auto"></div></div>
+                            <div class="absolute left-[42.78%] -translate-x-1/2 text-center">원격지<div class="w-px h-2 bg-slate-400 mx-auto"></div></div>
+                            <div class="absolute right-0 text-center">현지<div class="w-px h-2 bg-slate-400 mx-auto"></div></div>
+                        </div>
+                    </div>
+                    <div class="text-right mt-2">
+                        <span class="text-slate-500 text-sm">총 합계:</span>
+                        <span class="text-2xl font-bold text-indigo-600">1,559 ms</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -146,18 +169,13 @@
     document.addEventListener('DOMContentLoaded', () => {
         
         // --- DATA ---
-        // All data for simulators is centralized here for easy management.
         const simulatorData = [
             {
                 id: 'screen',
                 title: '화면 전송 딜레이',
                 color: { text: 'text-blue-600', bg: 'rgba(59, 130, 246, 0.7)' },
-                measurements: [
-                    { result: 667 }
-                ],
-                image: {
-                    src: 'https://github.com/garimto81/remote-check/blob/main/cam_delay_2507291119.png?raw=true'
-                }
+                measurements: [ { result: 667 } ],
+                image: { src: 'https://github.com/garimto81/remote-check/blob/main/cam_delay_2507291119.png?raw=true' }
             },
             {
                 id: 'fr7Moving',
@@ -176,9 +194,7 @@
                 id: 'fr7Preset',
                 title: 'FR7 프리셋 원격 제어 딜레이',
                 color: { text: 'text-purple-600', bg: 'rgba(168, 85, 247, 0.7)' },
-                measurements: [
-                    { label: '1차', time: '15:56:45:260 ~ 15:56:46:293', result: 1033 }
-                ],
+                measurements: [ { label: '1차', time: '15:56:45:260 ~ 15:56:46:293', result: 1033 } ],
                 video: {
                     poster: 'https://res.cloudinary.com/dbr6hutiy/video/upload/c_scale,w_600/remote-test_preset_v2_ofe3ii.jpg',
                     src: 'https://res.cloudinary.com/dbr6hutiy/video/upload/remote-test_preset_v2_ofe3ii.mp4'
@@ -188,9 +204,7 @@
                 id: 'audio',
                 title: '음성 통신 딜레이',
                 color: { text: 'text-orange-600', bg: 'rgba(249, 115, 22, 0.7)' },
-                measurements: [
-                    { label: '1차', time: '00:00:02.200 ~ 00:00:03.850', result: 1650 }
-                ],
+                measurements: [ { label: '1차', time: '00:00:02.200 ~ 00:00:03.850', result: 1650 } ],
                 video: {
                     poster: 'https://res.cloudinary.com/dbr6hutiy/video/upload/c_scale,w_600/250728_intercom_test_v1_zqjbal.jpg',
                     src: 'https://res.cloudinary.com/dbr6hutiy/video/upload/250728_intercom_test_v1_zqjbal.mp4'
@@ -198,46 +212,28 @@
             }
         ];
 
-        const charts = {}; // To hold chart instances
+        const charts = {};
 
-        // --- DYNAMIC HTML GENERATION ---
-        function renderSimulators() {
+        function renderMeasurementCards() {
             const container = document.getElementById('simulator-container');
             if (!container) return;
 
             let html = '';
             simulatorData.forEach(data => {
-                // Generates HTML for measurement records
                 const measurementsHtml = data.measurements.map(m => {
                     if (m.label) {
-                        return `
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="font-semibold bg-slate-200 px-2 py-1 rounded">${m.label}</span>
-                            <span class="text-slate-600"><span class="font-semibold">시간:</span> ${m.time}</span>
-                            <span class="text-slate-800 font-bold">결과: ${m.result} ms</span>
-                        </div>`;
+                        return `<div class="flex justify-between items-center text-sm"><span class="font-semibold bg-slate-200 px-2 py-1 rounded">${m.label}</span><span class="text-slate-600"><span class="font-semibold">시간:</span> ${m.time}</span><span class="text-slate-800 font-bold">결과: ${m.result} ms</span></div>`;
                     }
-                    return `
-                        <div class="text-center py-2">
-                            <p class="text-slate-800 font-bold">결과: ${m.result} ms</p>
-                        </div>`;
+                    return `<div class="text-center py-2"><p class="text-slate-800 font-bold">결과: ${m.result} ms</p></div>`;
                 }).join('');
                 
-                // Generate media element (video or image)
                 let mediaElement = '';
                 if (data.video) {
-                    mediaElement = `
-                    <video class="w-full h-full object-cover" controls poster="${data.video.poster}" onerror="this.onerror=null;this.poster='https://placehold.co/600x338/e2e8f0/475569?text=Video+Not+Found';">
-                        <source src="${data.video.src}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>`;
+                    mediaElement = `<video class="w-full h-full object-cover" controls poster="${data.video.poster}" onerror="this.onerror=null;this.poster='https://placehold.co/600x338/e2e8f0/475569?text=Video+Not+Found';"><source src="${data.video.src}" type="video/mp4">Your browser does not support the video tag.</video>`;
                 } else if (data.image) {
-                    mediaElement = `
-                    <img src="${data.image.src}" alt="${data.title} 참고 이미지" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/600x338/e2e8f0/475569?text=Image+Not+Found';">`;
+                    mediaElement = `<img src="${data.image.src}" alt="${data.title} 참고 이미지" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/600x338/e2e8f0/475569?text=Image+Not+Found';">`;
                 }
 
-
-                // Generates the entire card HTML
                 html += `
                 <div class="bg-white p-6 rounded-xl shadow-lg">
                     <div class="grid md:grid-cols-2 gap-8 items-start">
@@ -251,9 +247,7 @@
                         </div>
                         <div class="mt-4 md:mt-0">
                             <h4 class="font-semibold text-slate-700 mb-2">참고 자료</h4>
-                            <div class="w-full bg-slate-200 rounded-lg overflow-hidden shadow-inner aspect-video">
-                                ${mediaElement}
-                            </div>
+                            <div class="w-full bg-slate-200 rounded-lg overflow-hidden shadow-inner aspect-video">${mediaElement}</div>
                         </div>
                     </div>
                 </div>`;
@@ -261,15 +255,11 @@
             container.innerHTML = html;
         }
 
-        // --- CHART CREATION ---
         function createChart(config) {
             const ctx = config.chartCanvas.getContext('2d');
-            
-            // Calculate the average of all measurement results.
             const totalResult = config.measurements.reduce((sum, m) => sum + m.result, 0);
             const averageResult = config.measurements.length > 0 ? Math.round(totalResult / config.measurements.length) : 0;
             const displayValue = averageResult;
-            
             const isAverage = config.measurements.length > 1;
 
             return new Chart(ctx, {
@@ -290,15 +280,8 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 2000, 
-                            grid: { display: false }
-                        },
-                        y: {
-                            grid: { display: false },
-                            ticks: { display: false }
-                        }
+                        x: { beginAtZero: true, max: 2000, grid: { display: false } },
+                        y: { grid: { display: false }, ticks: { display: false } }
                     },
                     plugins: {
                         legend: { display: false },
@@ -306,8 +289,7 @@
                             enabled: true,
                             callbacks: {
                                 label: function(context) {
-                                    const label = context.dataset.label || '';
-                                    return `${label}: ${context.raw} ms`;
+                                    return `${context.dataset.label || ''}: ${context.raw} ms`;
                                 }
                             }
                          },
@@ -335,22 +317,18 @@
             });
         }
 
-        // --- INITIALIZATION ---
-        function initializeSimulators() {
+        function initializeCharts() {
             simulatorData.forEach(data => {
                 const chartCanvas = document.getElementById(`${data.id}-chart`);
                 if (chartCanvas) {
-                    // Create and store chart instance
                     charts[data.id] = createChart({ ...data, chartCanvas });
                 }
             });
         }
 
-        // --- NAVIGATION LOGIC ---
         function initializeNavigation() {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('#navbar a');
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -371,17 +349,14 @@
                     e.preventDefault();
                     const targetId = link.getAttribute('href');
                     if(targetId) {
-                        document.querySelector(targetId).scrollIntoView({
-                            behavior: 'smooth'
-                        });
+                        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
                     }
                 });
             });
         }
 
-        // --- APP START ---
-        renderSimulators();
-        initializeSimulators();
+        renderMeasurementCards();
+        initializeCharts();
         initializeNavigation();
     });
     </script>
